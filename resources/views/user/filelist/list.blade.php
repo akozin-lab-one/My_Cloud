@@ -5,7 +5,7 @@
 @section('mainContent')
     <div class="mt-12">
         <h2 class="text-3xl font-bold">My File</h2>
-        @if ($data_folder && $data_file !== '[]')
+        @if (count($data_folder) !== 0 || count($data_file) !== 0)
             <div class="mt-10 mb-5">
                 <h4 class="text-xl ">Folder</h4>
             </div>
@@ -39,7 +39,7 @@
                                 <ul class="py-2 text-sm text-gray-700 dark:text-gray-200"
                                     aria-labelledby="dropdownMenuIconButton">
                                     <li>
-                                        <a href="#"
+                                        <a href="{{route('userfolder#Rename', $da->id)}}"
                                             class="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">Rename</a>
                                     </li>
                                     <li>
@@ -68,7 +68,7 @@
                     <div class="bg-gray-200 hover:bg-gray-300 w-64 h-16 cursor-pointer rounded-lg">
                         <div class="flex ml-2 py-3">
                             <i class="fa fa-folder text-3xl"></i>
-                            <h4 class="ml-5 mt-1 font-bold text-xs mr-7">{{ $da->name }}</h4>
+                            <h4 class="ml-5 mt-1 font-bold text-xs mr-4">{{ $da->name }}</h4>
                             <button id="dropdownMenuIconButton" data-dropdown-toggle="dropdownDots"
                                 class="inline-flex ml-7 items-center p-2 text-sm font-medium text-center text-gray-900 bg-gray-200 rounded-lg focus:ring-4 focus:outline-none dark:text-white focus:ring-gray-50 dark:bg-gray-800 dark:hover:bg-gray-700 dark:focus:ring-gray-600"
                                 type="button">
@@ -85,7 +85,7 @@
                                 <ul class="py-2 text-sm text-gray-700 dark:text-gray-200"
                                     aria-labelledby="dropdownMenuIconButton">
                                     <li>
-                                        <a href="#"
+                                        <a href="{{route('userfile#Rename', $da->id)}}"
                                             class="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">Rename</a>
                                     </li>
                                     <li>
@@ -106,8 +106,8 @@
                 @endforeach
             </div>
         @else
-            <div class="flex mt-8">
-                There is no file or Folder in your cloud!!
+            <div class="flex h-screen justify-center items-center">
+                <h1 class="text-3xl text-red-600">There is no file or Folder in your cloud!!</h1>
             </div>
         @endif
     </div>

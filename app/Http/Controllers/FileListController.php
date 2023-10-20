@@ -119,6 +119,54 @@ class FileListController extends Controller
         return back()->with('success', 'Folder uploaded successfully.');
     }
 
+    //FolderRenamePage
+    public function folderRenamePage($id){
+        // dd($id);
+        $folderName = FileList::select('name')->where('id', $id)->first();
+        // dd($folderName->toArray());
+        $category = Category::select('id')->where('name', 'Folder')->first();
+        $category_two = Category::select('id')->where('name', 'File')->first();
+        return view('user.filelist.fileRename', compact('category', 'category_two','folderName','id'));
+    }
+
+    //folderRename
+    public function FolderRename(Request $request){
+        // dd($request->toArray());
+        $this->requestfolderValidation($request);
+        $data = [
+            'name' =>$request->folder
+        ];
+
+        FileList::where('id', $request->folderId)->update($data);
+
+        return back()->with(['successful Rename' => "Your folder is successfully renamed!!"]);
+    }
+
+    //FIleRenamePage
+    public function fileRenamePage($id){
+        // dd($id);
+        $fileName = FileList::select('name')->where('id', $id)->first();
+        // dd($folderName->toArray());
+        $category = Category::select('id')->where('name', 'Folder')->first();
+        $category_two = Category::select('id')->where('name', 'File')->first();
+        return view('user.filelist.folderRename', compact('category', 'category_two','fileName', 'id'));
+    }
+
+    //FileRename
+    public function fileRename(Request $request){
+        // dd($request->toArray());
+        Validator::make($request->all(),[
+            'file' => 'required|file|mimes:zip',
+        ]);
+        $data = [
+            'name' =>$request->file
+        ];
+
+        FileList::where('id', $request->fileId)->update($data);
+
+        return back()->with(['successful Rename' => "Your folder is successfully renamed!!"]);
+    }
+
     //FolderDeletePage
     public function FolderDeletePage($id){
         FileList::where('id',$id)->delete();

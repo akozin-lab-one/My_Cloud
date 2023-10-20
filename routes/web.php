@@ -49,6 +49,18 @@ Route::middleware([
         //subfile
         // Route::get('/createFile', [FileListController::class, 'SubFileUpload'])->name('user#subFile');
 
+        //folderRenamePage
+        Route::get('rename/folder/{folderId}', [FileListController::class, 'folderRenamePage'])->name('userfolder#Rename');
+
+        //folderRename
+        Route::post('rename/folder', [FileListController::class, 'FolderRename'])->name('userfolder#Rename');
+
+        //fileRenamePage
+        Route::get('rename/file/{fileId}', [FileListController::class, 'fileRenamePage'])->name('userfile#Rename');
+
+        //fileRename
+        Route::post('rename/file', [FileListController::class, 'fileRename'])->name('userfile#Rename');
+
         //folderDelete
         Route::post('delete/{folderId}',[FileListController::class, 'FolderDeletePage'])->name('userfolder#delete');
 
